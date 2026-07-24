@@ -230,6 +230,21 @@ controlled statuses and required decision metadata, then writes
 `data/processed/governance`. See `docs/management_governance.md` for the
 assignment, evidence, review and approval workflow.
 
+Build the Phase 4 evidence pack for the six strongest persistent cases with:
+
+```bash
+.venv/bin/python -m customer_harm.governance.persistent_case_cli
+```
+
+This writes case, period and triggered-rule evidence under
+`data/processed/governance/persistent_cases`, creates the durable
+`data/mappings/persistent_case_review_decisions.csv` template only when it does
+not already exist, and updates `docs/persistent_case_review_status.md`. The
+review procedure and controlled conclusions are documented in
+`docs/persistent_case_review_guide.md`. The cautious preliminary assessment of
+all six cases is in `docs/persistent_case_preliminary_assessment.md`; it leaves
+root cause and business approval unresolved where public data is insufficient.
+
 Build the Tableau delivery pack with:
 
 ```bash

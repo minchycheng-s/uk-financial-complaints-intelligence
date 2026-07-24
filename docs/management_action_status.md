@@ -16,7 +16,7 @@ A pending analytical candidate must not be represented as approved. Completing a
 
 | Action | Priority | Status | Approval | Owner | Due date |
 |---|---|---|---|---|---|
-| ACT-001: Review persistent firm-product cases | critical | planned | not_requested | Unassigned | Not set |
+| ACT-001: Review persistent firm-product cases | critical | in_progress | not_requested | Unassigned | Not set |
 | ACT-002: Complete the latest priority queue | high | planned | not_requested | Unassigned | Not set |
 | ACT-003: Diagnose dominant rule drivers | high | planned | not_requested | Unassigned | Not set |
 | ACT-004: Establish Consumer Credit monitoring | medium | planned | not_requested | Unassigned | Not set |

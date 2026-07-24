@@ -30,6 +30,7 @@ apply-warning-case-reviews = "customer_harm.analytics.case_review_cli:main"
 build-dashboard-reporting = "customer_harm.reporting.cli:main"
 build-tableau-pack = "customer_harm.reporting.tableau_cli:main"
 build-management-governance-report = "customer_harm.governance.cli:main"
+build-persistent-case-review-pack = "customer_harm.governance.persistent_case_cli:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
