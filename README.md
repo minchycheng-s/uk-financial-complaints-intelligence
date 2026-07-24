@@ -208,6 +208,12 @@ After the v2 warning and priority-review steps, run:
 
 Outputs under `data/processed/reporting` provide separate, validated Tableau sources for firm-product trends, firm-period navigation, warning-rule explanation, peer benchmarks and source-cell drill-down. Keep these as logical related tables; flattening them would duplicate observations and produce incorrect totals. Dashboard layout, filters and safe aggregation rules are defined in `tableau/dashboard_requirements.md` and `tableau/calculated_fields.md`.
 
+The management-facing interpretation of the current analytical release is in
+[`docs/analytical_findings.md`](docs/analytical_findings.md). It documents the
+latest-period findings, persistent cases, recommended actions and limitations
+directly from the validated reporting tables; Tableau is not required to
+reproduce those conclusions.
+
 Build the Tableau delivery pack with:
 
 ```bash
