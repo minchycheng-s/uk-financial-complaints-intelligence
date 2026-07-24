@@ -214,6 +214,22 @@ latest-period findings, persistent cases, recommended actions and limitations
 directly from the validated reporting tables; Tableau is not required to
 reproduce those conclusions.
 
+## Govern management actions and approvals
+
+Phase 3 turns the findings into a controlled action register without implying
+business approval:
+
+```bash
+.venv/bin/python -m customer_harm.governance.cli
+```
+
+The durable register is
+`data/mappings/management_action_register.csv`; the command validates its
+controlled statuses and required decision metadata, then writes
+`docs/management_action_status.md` and a machine-readable summary under
+`data/processed/governance`. See `docs/management_governance.md` for the
+assignment, evidence, review and approval workflow.
+
 Build the Tableau delivery pack with:
 
 ```bash
