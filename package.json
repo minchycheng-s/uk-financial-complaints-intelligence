@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "next": "15.5.7",
+    "@vitejs/plugin-rsc": "0.5.30",
     "react": "19.2.6",
     "react-dom": "19.2.6",
     "vinext": "1.0.0-beta.4"
