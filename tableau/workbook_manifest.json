@@ -1,0 +1,89 @@
+{
+  "workbook_name": "UK Financial Complaints and Customer Harm Intelligence",
+  "status": "tableau_assembly_pack",
+  "notice": "Analytical prioritisation only; not evidence of misconduct or customer harm. Pending business approval.",
+  "data_model": {
+    "relationship_mode": "logical_relationships_not_physical_flattening",
+    "primary_source": "data/processed/reporting/dashboard_firm_product_period.csv",
+    "relationship_contract": "See tableau/dashboard_requirements.md"
+  },
+  "dashboards": [
+    {
+      "name": "Executive Overview",
+      "size": "1366x768",
+      "sources": [
+        "executive_kpis",
+        "executive_period_trend",
+        "executive_product_snapshot"
+      ],
+      "filters": [
+        "reporting_period",
+        "product_group_label"
+      ],
+      "actions": [
+        "Firm selection opens Priority Review Queue"
+      ]
+    },
+    {
+      "name": "Priority Review Queue",
+      "size": "1366x768",
+      "sources": [
+        "priority_review_queue",
+        "dashboard_firm_product_period"
+      ],
+      "filters": [
+        "reporting_period",
+        "product_group_label",
+        "review_disposition",
+        "display_firm_name"
+      ],
+      "default_sort": "review_queue_sort_order asc, warning_score desc"
+    },
+    {
+      "name": "Firm and Product Explorer",
+      "size": "1366x768",
+      "sources": [
+        "dashboard_firm_product_period",
+        "dashboard_peer_benchmarks"
+      ],
+      "filters": [
+        "display_firm_name",
+        "product_group_label",
+        "reporting_period"
+      ]
+    },
+    {
+      "name": "Rule Explanation",
+      "size": "1366x768",
+      "sources": [
+        "dashboard_warning_rule_detail"
+      ],
+      "filters": [
+        "display_firm_name",
+        "product_group_label",
+        "reporting_period",
+        "rule_status"
+      ]
+    },
+    {
+      "name": "Data Quality and Coverage",
+      "size": "1366x768",
+      "sources": [
+        "data_quality_summary",
+        "dashboard_source_metric_detail"
+      ],
+      "filters": [
+        "reporting_period",
+        "product_group_label",
+        "identity_match_status"
+      ]
+    }
+  ],
+  "prohibited": [
+    "sum percentages",
+    "sum context rates",
+    "sum rule rows",
+    "convert insufficient_data to zero",
+    "infer misconduct from a band"
+  ]
+}

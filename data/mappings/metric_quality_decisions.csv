@@ -1,0 +1,4 @@
+reporting_period,source_workbook,source_sheet,source_row,source_column,quality_flag,quality_review_status,reviewer,reviewed_at,reviewer_comment
+2022-H1,firm-level-complaints-data-2022-h1.xlsx,% closed in 3 days,191,9,percentage_above_expected_range,source_value_confirmed,Mingzhicheng,2026-07-18,"Workbook displays 200.00%; preserve stored value 2.0 without rescaling or capping."
+2022-H2,firm-level-complaints-data-2022-h2.xlsx,"upheld ",67,6,percentage_above_expected_range,source_value_confirmed,Mingzhicheng,2026-07-18,"Workbook displays 120.00%; preserve stored value 1.2 without rescaling or capping."
+2024-H2,firm-level-complaints-data-2024-h2.xlsx,Consumer Credit,66,9,percentage_above_expected_range,source_value_confirmed,Mingzhicheng,2026-07-18,"Workbook displays 782.81%; preserve full stored value 7.828070175438596 without rescaling or capping."

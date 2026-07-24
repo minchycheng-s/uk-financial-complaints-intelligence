@@ -1,0 +1,33 @@
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ipynb_checkpoints/
+
+# Raw source files can be large and may have redistribution restrictions.
+data/raw/
+
+# Tableau temporary and recovery files
+.~*
+*.twbr
+
+# Generated pipeline outputs
+data/interim/
+data/metadata/
+data/processed/*
+
+# Keep the final Tableau deliverables
+!data/processed/reporting/
+data/processed/reporting/*
+!data/processed/reporting/presentation/
+data/processed/reporting/presentation/*
+!data/processed/reporting/presentation/uk_financial_complaints_intelligence.twbx
+!data/processed/reporting/presentation/tableau_pack_summary.json
+
+# macOS files
+.DS_Store
+
+# Local secrets
+.env
+.env.*

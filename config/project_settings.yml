@@ -1,0 +1,6 @@
+profiling:
+  output_dir: data/interim/profiling
+  metadata_dir: data/metadata
+  header_scan_rows: 40
+  expected_workbook_count: 10
+

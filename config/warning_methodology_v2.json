@@ -1,0 +1,30 @@
+{
+  "methodology_id": "fca_complaint_early_warning_v2_candidate",
+  "methodology_status": "analytical_candidate_pending_business_review",
+  "minimum_peer_size": 20,
+  "minimum_eligible_rules_for_classification": 3,
+  "maximum_persistence_bonus": 2,
+  "family_point_caps": {
+    "context_rate": 4,
+    "complaint_outcome": 4,
+    "timeliness": 3,
+    "volume_pressure": 2
+  },
+  "priority_bands": [
+    {"minimum_score": 8, "label": "priority_review"},
+    {"minimum_score": 3, "label": "review"},
+    {"minimum_score": 1, "label": "monitor"},
+    {"minimum_score": 0, "label": "no_current_signal"}
+  ],
+  "rules": [
+    {"rule_id": "CTX_PROVISION_PEER_HIGH", "label": "Provision context rate in highest peer decile", "category": "context_rate", "score_family": "context_rate", "points": 3, "peer_count_feature": "context_provision_rate_peer_count", "conditions": [{"feature": "context_provision_rate_peer_percentile", "operator": ">=", "threshold": 0.9}]},
+    {"rule_id": "CTX_INTERMEDIATION_PEER_HIGH", "label": "Intermediation context rate in highest peer decile", "category": "context_rate", "score_family": "context_rate", "points": 3, "peer_count_feature": "context_intermediation_rate_peer_count", "conditions": [{"feature": "context_intermediation_rate_peer_percentile", "operator": ">=", "threshold": 0.9}]},
+    {"rule_id": "UPHELD_PEER_HIGH", "label": "Upheld percentage in highest peer decile with at least 20 closed complaints", "category": "complaint_outcome", "score_family": "complaint_outcome", "points": 3, "peer_count_feature": "complaints_upheld_pct_peer_count", "conditions": [{"feature": "complaints_closed_count", "operator": ">=", "threshold": 20}, {"feature": "complaints_upheld_pct_peer_percentile", "operator": ">=", "threshold": 0.9}]},
+    {"rule_id": "OVER_8_WEEKS_HIGH", "label": "At least 10% closed beyond eight weeks, upper peer quartile and at least 20 closed complaints", "category": "timeliness", "score_family": "timeliness", "points": 3, "peer_count_feature": "closed_over_8_weeks_pct_peer_count", "conditions": [{"feature": "complaints_closed_count", "operator": ">=", "threshold": 20}, {"feature": "closed_over_8_weeks_pct", "operator": ">=", "threshold": 0.1}, {"feature": "closed_over_8_weeks_pct_peer_percentile", "operator": ">=", "threshold": 0.75}]},
+    {"rule_id": "UPHELD_DETERIORATION", "label": "Upheld percentage increased at least five percentage points with at least 20 closed complaints", "category": "deterioration", "score_family": "complaint_outcome", "points": 2, "peer_count_feature": "complaints_upheld_pct_peer_count", "conditions": [{"feature": "complaints_closed_count", "operator": ">=", "threshold": 20}, {"feature": "change_complaints_upheld_pct", "operator": ">=", "threshold": 0.05}, {"feature": "complaints_upheld_pct_peer_percentile", "operator": ">=", "threshold": 0.75}]},
+    {"rule_id": "CTX_PROVISION_DETERIORATION", "label": "Provision context rate increased at least 25%", "category": "deterioration", "score_family": "context_rate", "points": 2, "peer_count_feature": "context_provision_rate_peer_count", "conditions": [{"feature": "pct_change_context_provision_rate", "operator": ">=", "threshold": 0.25}, {"feature": "context_provision_rate_peer_percentile", "operator": ">=", "threshold": 0.75}]},
+    {"rule_id": "CTX_INTERMEDIATION_DETERIORATION", "label": "Intermediation context rate increased at least 25%", "category": "deterioration", "score_family": "context_rate", "points": 2, "peer_count_feature": "context_intermediation_rate_peer_count", "conditions": [{"feature": "pct_change_context_intermediation_rate", "operator": ">=", "threshold": 0.25}, {"feature": "context_intermediation_rate_peer_percentile", "operator": ">=", "threshold": 0.75}]},
+    {"rule_id": "OPENED_VOLUME_PRESSURE", "label": "Opened complaints increased at least 25% and are in highest peer decile", "category": "volume_pressure", "score_family": "volume_pressure", "points": 1, "peer_count_feature": "complaints_opened_count_peer_count", "conditions": [{"feature": "pct_change_complaints_opened_count", "operator": ">=", "threshold": 0.25}, {"feature": "complaints_opened_count_peer_percentile", "operator": ">=", "threshold": 0.9}]},
+    {"rule_id": "OPENED_EXCEPTIONAL_GROWTH", "label": "Opened complaints at least doubled and current volume is at least 100", "category": "volume_pressure", "score_family": "volume_pressure", "points": 2, "peer_count_feature": "complaints_opened_count_peer_count", "conditions": [{"feature": "complaints_opened_count", "operator": ">=", "threshold": 100}, {"feature": "pct_change_complaints_opened_count", "operator": ">=", "threshold": 1.0}]}
+  ]
+}

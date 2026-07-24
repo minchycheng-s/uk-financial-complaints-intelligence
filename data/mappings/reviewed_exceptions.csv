@@ -1,0 +1,6 @@
+reporting_period,canonical_sheet,raw_field,rule,value_status,value_reason,review_item_id
+2023-H2,context_intermediation,unnamed_9,misplaced_include_header,excluded,derived_total_not_product_group,REV-F1ED3817F3
+2025-H1,trading_names,Other trading names,null_literal_is_missing,missing_marker,source_null_literal,REV-DE070F74FA
+2025-H2,percentage_within_3_days,Grand Total,excel_error_without_components,not_calculable,no_component_values,REV-D7590B79E4
+2025-H2,percentage_upheld,Grand Total,excel_error_without_components,not_calculable,no_component_values,REV-189F967382
+2023-H2,all,Firm Group,empty_identifier_column,missing,entire_column_missing,REV-EB30419D16

@@ -1,0 +1,17 @@
+fca_firm_level:
+  input_dir: data/raw/fca/firm_level
+  file_patterns:
+    - "*.xlsx"
+    - "*.xlsm"
+  expected_periods:
+    - 2021-H1
+    - 2021-H2
+    - 2022-H1
+    - 2022-H2
+    - 2023-H1
+    - 2023-H2
+    - 2024-H1
+    - 2024-H2
+    - 2025-H1
+    - 2025-H2
+

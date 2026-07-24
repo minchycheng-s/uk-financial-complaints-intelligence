@@ -1,0 +1,1 @@
+"""Dashboard-ready reporting outputs."""

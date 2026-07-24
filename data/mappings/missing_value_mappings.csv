@@ -1,0 +1,9 @@
+scope,raw_value,value_status,value_reason
+metric_cell,,missing,blank_source_cell
+metric_cell,null,missing_marker,source_missing_literal
+metric_cell,N/A,missing_marker,source_missing_literal
+metric_cell,NA,missing_marker,source_missing_literal
+metric_cell,-,missing_marker,source_missing_literal
+trading_name,null,missing_marker,source_null_literal
+trading_name,0,missing_marker,source_zero_placeholder
+reviewed_2025_h2_total,#N/A,not_calculable,no_component_values

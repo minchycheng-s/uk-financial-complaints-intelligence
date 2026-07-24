@@ -1,0 +1,14 @@
+{
+  "status": "passed",
+  "native_tableau_workbook_created": false,
+  "native_workbook_reason": "Tableau Desktop/SDK unavailable in build environment",
+  "presentation_table_rows": {
+    "executive_kpis": 1,
+    "executive_period_trend": 10,
+    "executive_product_snapshot": 6,
+    "priority_review_queue": 135,
+    "data_quality_summary": 5
+  },
+  "dashboard_count": 5,
+  "validation_issues": []
+}

@@ -1,0 +1,38 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "customer-complaint-warning-system"
+version = "0.2.0"
+description = "UK financial complaints and customer-harm intelligence platform"
+requires-python = ">=3.11"
+dependencies = [
+  "pandas>=2.0,<3.0",
+  "openpyxl>=3.1,<4.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8,<9"]
+
+[project.scripts]
+profile-fca-workbooks = "customer_harm.profiling.cli:main"
+execute-profiling-notebook = "customer_harm.profiling.notebook:main"
+extract-fca-workbooks = "customer_harm.extraction.cli:main"
+resolve-fca-firms = "customer_harm.matching.cli:main"
+suggest-fca-firm-matches = "customer_harm.matching.suggestion_cli:main"
+apply-fca-firm-match-reviews = "customer_harm.matching.review_cli:main"
+build-analysis-tables = "customer_harm.analytics.cli:main"
+build-complaint-features = "customer_harm.features.cli:main"
+build-complaint-warnings = "customer_harm.analytics.warning_cli:main"
+validate-warning-methodology = "customer_harm.analytics.validation_cli:main"
+apply-warning-case-reviews = "customer_harm.analytics.case_review_cli:main"
+build-dashboard-reporting = "customer_harm.reporting.cli:main"
+build-tableau-pack = "customer_harm.reporting.tableau_cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests/unit", "tests/integration"]
+addopts = "-q"
