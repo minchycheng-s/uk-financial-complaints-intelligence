@@ -4,21 +4,6 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vinext dev",
-    "build": "vinext build && mkdir -p dist/.openai && cp .openai/hosting.json dist/.openai/hosting.json",
-    "start": "vinext start",
-    "lint": "vinext lint"
-  },
-  "dependencies": {
-    "next": "16.1.6",
-    "react": "19.2.6",
-    "react-dom": "19.2.6",
-    "react-server-dom-webpack": "19.2.6",
-    "vinext": "1.0.0-beta.4"
-  },
-  "devDependencies": {
-    "@vitejs/plugin-react": "latest",
-    "@vitejs/plugin-rsc": "0.5.30",
-    "vite": "latest"
+    "build": "mkdir -p dist/server dist/.openai && cp site-worker/index.js dist/server/index.js && cp .openai/hosting.json dist/.openai/hosting.json"
   }
 }
