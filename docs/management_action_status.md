@@ -17,10 +17,10 @@ A pending analytical candidate must not be represented as approved. Completing a
 | Action | Priority | Status | Approval | Owner | Due date |
 |---|---|---|---|---|---|
 | ACT-001: Review persistent firm-product cases | critical | in_progress | not_requested | Unassigned | Not set |
-| ACT-002: Complete the latest priority queue | high | planned | not_requested | Unassigned | Not set |
-| ACT-003: Diagnose dominant rule drivers | high | planned | not_requested | Unassigned | Not set |
-| ACT-004: Establish Consumer Credit monitoring | medium | planned | not_requested | Unassigned | Not set |
-| ACT-005: Resolve insufficient-evidence cases | high | planned | not_requested | Unassigned | Not set |
+| ACT-002: Complete the latest priority queue | high | in_progress | not_requested | Unassigned | Not set |
+| ACT-003: Diagnose dominant rule drivers | high | in_progress | not_requested | Unassigned | Not set |
+| ACT-004: Establish Consumer Credit monitoring | medium | in_progress | not_requested | Unassigned | Not set |
+| ACT-005: Resolve insufficient-evidence cases | high | in_progress | not_requested | Unassigned | Not set |
 | ACT-006: Approve or reject warning methodology | critical | planned | pending | Unassigned | Not set |
 | ACT-007: Decide treatment of confirmed source anomaly | high | planned | pending | Unassigned | Not set |
 

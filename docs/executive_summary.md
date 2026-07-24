@@ -58,4 +58,9 @@ The implemented states are:
 
 ## Release conclusion
 
-The FCA module is complete as a reproducible portfolio and analytical-demonstration release. It has automated tests, source reconciliation, reviewed mappings, explicit quality gates, a full rebuild audit and a packaged Tableau workbook. Production use remains conditional on business approval, documented treatment of known caveats and normal release governance.
+The FCA module is complete as a reproducible portfolio and
+analytical-demonstration release. It has automated tests, source
+reconciliation, reviewed mappings, explicit quality gates, a full rebuild
+audit and a packaged Tableau workbook. An authorised business reviewer was not
+available, so formal approval is explicitly deferred rather than assumed.
+Production use remains out of scope. See `docs/portfolio_release_status.md`.

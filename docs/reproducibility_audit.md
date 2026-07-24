@@ -29,7 +29,7 @@ The following sequence was run from the repository root:
 
 Results:
 
-- Tests: 76 passed.
+- Tests: 85 passed, including governance evidence and release-gate controls.
 - Profiling: 10 workbooks and 116 sheets.
 - Extraction and reviewed identity resolution: 75,231 metric rows preserved.
 - Analysis tables: 75,231 fact rows; 31,703 analysis-ready values.
@@ -73,8 +73,17 @@ These values match the Tableau workbook acceptance checks used during manual ass
 3. The confirmed UK Warranty Limited source anomaly is retained exactly as published. The affected derived timeliness measure requires documented business treatment.
 4. The optional Tableau rule-selection action did not behave as intended during assembly and was explicitly deferred. The rule sheets and evidence remain visible; the issue does not alter source data or calculated results.
 5. The packaged Tableau workbook should be opened, refreshed and saved once more after a full data rebuild so its embedded extracts are explicitly synchronized with the newly generated CSV files.
-6. Git metadata was not available in this workspace during the audit, so commit-level provenance and a clean-working-tree check could not be verified.
+6. Git metadata is now available and the project has been pushed to a remote
+   repository. The current release-hardening changes must still be committed
+   and pushed before a clean-working-tree release check can pass.
+7. No authorised business reviewer is available in the project environment.
+   This does not prevent portfolio demonstration, but formal approval remains
+   deferred and the operational release gate remains false.
 
 ## Release interpretation
 
-The project is ready for reproducible analytical demonstration and portfolio presentation. Production or regulatory use remains conditional on business approval of the methodology, treatment of documented caveats, and normal release controls such as versioned source control and a final refreshed Tableau package.
+The project is ready for reproducible analytical demonstration and portfolio
+presentation. Its release classification and permitted claims are documented
+in `docs/portfolio_release_status.md`. Production or regulatory use remains
+conditional on business approval of the methodology, treatment of documented
+caveats and normal operational controls.

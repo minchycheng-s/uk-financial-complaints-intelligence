@@ -245,6 +245,32 @@ review procedure and controlled conclusions are documented in
 all six cases is in `docs/persistent_case_preliminary_assessment.md`; it leaves
 root cause and business approval unresolved where public data is insufficient.
 
+Build the evidence queues for management actions ACT-002 to ACT-005 with:
+
+```bash
+.venv/bin/python -m customer_harm.governance.action_evidence_cli
+```
+
+This writes reproducible priority, rule-driver, Consumer Credit monitoring and
+insufficient-evidence queues under
+`data/processed/governance/action_evidence`. The accompanying assessments are
+in `docs/latest_priority_queue_assessment.md`,
+`docs/rule_driver_assessment.md`, `docs/consumer_credit_monitoring.md` and
+`docs/insufficient_evidence_assessment.md`. Recommendations for the two
+business decisions are in `docs/methodology_decision_brief.md` and
+`docs/source_anomaly_decision_brief.md`; neither document grants approval.
+
+Prepare the evidence-linked business-review agenda and conservative operational
+release gate with:
+
+```bash
+.venv/bin/python -m customer_harm.governance.handoff_cli
+```
+
+This writes `docs/business_review_handoff.md` and
+`data/processed/governance/operational_release_gate.json`. The gate remains
+false until the required governance decisions have been explicitly recorded.
+
 Build the Tableau delivery pack with:
 
 ```bash
@@ -273,6 +299,11 @@ Run the stages in dependency order:
 ```
 
 The latest verified run, acceptance totals, raw-file integrity result and remaining release cautions are recorded in `docs/reproducibility_audit.md`.
+
+For portfolio use where no authorised business reviewer is available, follow
+the permitted claims and deferred-approval boundary in
+`docs/portfolio_release_status.md`. The project remains demonstrable and
+reproducible, while the operational release gate correctly remains false.
 
 ## Generated outputs
 
