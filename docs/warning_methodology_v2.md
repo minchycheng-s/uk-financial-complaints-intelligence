@@ -4,6 +4,20 @@
 
 `fca_complaint_early_warning_v2_candidate` is a review candidate created from the completed 25-case assessment of v1. It remains an analytical prioritisation tool, not a prediction of misconduct or proof of customer harm. A business owner must review and approve it before operational use.
 
+## Business terminology and classification states
+
+The original business case used four management categories. V2 uses four scored bands plus a separate coverage state:
+
+| Business term | V2 state | Interpretation |
+|---|---|---|
+| High priority | `priority_review` | Strongest combined evidence; investigate first |
+| Medium priority | `review` | Material signals requiring diagnostic review |
+| Watchlist | `monitor` | Early or limited signal; continue monitoring |
+| Low priority | `no_current_signal` | No triggered rule with enough eligible evidence |
+| Not defined separately | `insufficient_data` | Too few eligible rules to classify |
+
+`insufficient_data` is not a low-priority category. It prevents missing, unavailable or ineligible evidence from being converted into an apparently reassuring result. Likewise, `no_current_signal` means only that the configured rules did not identify a current signal with sufficient coverage; it is not proof that a firm or product is low risk.
+
 ## Why v1 was revised
 
 The case review found four likely false positives where upheld percentages were calculated from very small numbers of closed complaints. It also found one potential false negative where complaints more than tripled to 12,736 but the firm did not cross the 90th peer percentile. Several rules also measured the same underlying signal and could overstate the amount of independent evidence.
