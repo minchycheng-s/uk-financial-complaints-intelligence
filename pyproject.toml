@@ -33,6 +33,8 @@ build-management-governance-report = "customer_harm.governance.cli:main"
 build-persistent-case-review-pack = "customer_harm.governance.persistent_case_cli:main"
 build-management-action-evidence = "customer_harm.governance.action_evidence_cli:main"
 build-business-review-handoff = "customer_harm.governance.handoff_cli:main"
+build-external-context = "customer_harm.external_context.cli:main"
+build-external-context-reporting = "customer_harm.external_context.reporting_cli:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]

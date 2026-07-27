@@ -66,8 +66,8 @@ The original business case describes a broader multi-source platform. The curren
 | Transparent anomaly detection | Delivered |
 | Explainable prioritisation | Delivered; pending business approval |
 | Tableau dashboards | Delivered |
-| Financial Ombudsman Service integration | Future phase |
-| Bank of England and ONS integration | Future phase |
+| Financial Ombudsman Service integration | Partial: taxonomy profiled and mapping candidates generated; outcomes data not yet acquired |
+| Bank of England and ONS integration | Context module delivered; deliberately excluded from warning points pending validation |
 | Redress and financial-exposure scenarios | Future phase |
 | Forecasting | Future phase |
 | Google Cloud Storage and BigQuery | Future phase |
@@ -91,7 +91,7 @@ This is a semantic mapping for communication, not a claim that the score measure
 
 | Criterion | FCA release assessment |
 |---|---|
-| Clean and reproducible multi-source dataset | Partial: reproducible FCA multi-workbook dataset; external sources not integrated |
+| Clean and reproducible multi-source dataset | Partial: reproducible FCA, BOE and selected ONS context tables plus FOS taxonomy; FOS outcomes not integrated |
 | Standardise firms and products | Delivered |
 | Identify decision-relevant trends | Analytical views delivered; final findings report remains a separate phase |
 | Distinguish volume from normalised risk | Delivered where context measures are published |

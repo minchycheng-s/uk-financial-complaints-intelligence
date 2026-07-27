@@ -80,3 +80,30 @@ Use `data_quality_summary.csv` for headline counts and `dashboard_source_metric_
 - Workbook title and tooltips use investigation/prioritisation language only.
 
 After these checks, record the Tableau reviewer, review date and approval status before publishing.
+
+## 10. Economic context dashboard
+
+Run:
+
+```bash
+.venv/bin/python -m customer_harm.external_context.cli
+.venv/bin/python -m customer_harm.external_context.reporting_cli
+```
+
+Add `dashboard_economic_context.csv` and
+`dashboard_product_period_context.csv` as separate logical tables. Relate
+`reporting_period = reporting_period`; do not create a physical join to the
+firm-product table.
+
+Recommended sheets:
+
+1. Bank Rate trend using `end_bank_rate`.
+2. ONS context trend using one selected `*_period_end` measure at a time.
+3. Product complaint volume using `complaints_opened_total`.
+4. Product outcome medians using the fields ending `_median`.
+5. Warning workload using priority, review, monitor and insufficient-data
+   observation counts.
+
+Use product group as a filter only on the product-period table. Economic
+values should remain unchanged when the selected product changes. Place the
+external-context interpretation notice directly below the dashboard title.

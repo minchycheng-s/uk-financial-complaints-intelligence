@@ -17,6 +17,7 @@ data/
   interim/profiling/          Generated profiling CSV/JSON outputs
   interim/extracted/          Generated reviewed extraction outputs
   interim/resolved/           Conservative and manually reviewed firm resolution
+  interim/external_context/   BOE/ONS/FOS source profiles and tidy FOS taxonomy
   metadata/                   Generated ingestion manifest
   processed/                  Analysis, feature, warning and reporting outputs
 docs/                         Method, architecture and limitations
@@ -148,6 +149,35 @@ Build firm/product observations, trends and peer benchmarks without applying a r
 ```
 
 Outputs under `data/processed/features` are `firm_product_period_features.csv`, `product_period_benchmarks.csv`, `feature_validation.csv` and `feature_summary.json`. Trends use actual source-window end dates, zero-denominator growth remains missing, and peer percentiles are descriptive rather than automatic warning classifications. See `docs/feature_methodology.md`.
+
+## Build external economic and taxonomy context
+
+Build reporting-period Bank Rate context, a deliberately selected set of ONS
+price indicators and a tidy FOS product taxonomy:
+
+```bash
+.venv/bin/python -m customer_harm.external_context.cli
+```
+
+Generated BOE and ONS tables are written under
+`data/processed/external_context`; source profiles and the tidy FOS taxonomy
+are written under `data/interim/external_context`. The command creates
+`data/mappings/fca_fos_product_mapping.csv` only when it does not already
+exist. Every suggested mapping remains `pending_review` and no external
+indicator changes the warning score. See
+`docs/external_context_methodology.md`.
+
+After the standard dashboard reporting build has completed, generate the two
+relationship-safe Tableau context sources with:
+
+```bash
+.venv/bin/python -m customer_harm.external_context.reporting_cli
+```
+
+This writes `dashboard_economic_context.csv` at one row per reporting period
+and `dashboard_product_period_context.csv` at one row per reporting
+period/product. Relate them in Tableau by `reporting_period`; do not physically
+join them to firm-level records.
 
 ## Build early-warning indicators
 

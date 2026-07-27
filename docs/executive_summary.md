@@ -49,7 +49,10 @@ The implemented states are:
 
 ## Material limitations
 
-- The analytical model currently uses FCA firm-level complaints data only. Bank of England, ONS and Financial Ombudsman Service data are not yet integrated.
+- The warning model still uses FCA firm-level complaints evidence only. BOE and
+  selected ONS indicators are now available as separate reporting-period
+  context, while the FOS workbook supports taxonomy mapping only; none of these
+  external sources currently changes warning points.
 - Published firms and peer populations may change between periods.
 - Firm reporting windows may overlap or differ in duration.
 - Some firm identities remain unresolved and retain stable name-based keys rather than an unverified FRN.

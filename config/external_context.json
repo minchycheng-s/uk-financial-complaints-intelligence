@@ -1,0 +1,36 @@
+{
+  "reporting_period_start": "2021-H1",
+  "reporting_period_end": "2025-H2",
+  "ons_series": {
+    "cpi_annual_rate": {
+      "source_column": "CPI ANNUAL RATE 00: ALL ITEMS 2015=100",
+      "unit": "percentage_points",
+      "decision_use": "General cost-of-living pressure"
+    },
+    "cpih_annual_rate": {
+      "source_column": "CPIH ANNUAL RATE 00: ALL ITEMS 2015=100",
+      "unit": "percentage_points",
+      "decision_use": "Inflation including owner-occupier housing costs"
+    },
+    "housing_services_annual_rate": {
+      "source_column": "CPI 12mth: Housing services (S) 2015=100",
+      "unit": "percentage_points",
+      "decision_use": "Housing-cost context for home-finance complaints"
+    },
+    "insurance_annual_rate": {
+      "source_column": "CPI ANNUAL RATE 12.5 : INSURANCE 2015=100",
+      "unit": "percentage_points",
+      "decision_use": "Price context for insurance complaints"
+    },
+    "financial_services_annual_rate": {
+      "source_column": "CPI ANNUAL RATE 12.6 : FINANCIAL SERVICES N.E.C. 2015=100",
+      "unit": "percentage_points",
+      "decision_use": "Price context for financial-service complaints"
+    },
+    "mortgage_interest_payments_annual_rate": {
+      "source_column": "RPI:Percentage change over 12 months - Mortgage interest payments",
+      "unit": "percentage_points",
+      "decision_use": "Supplementary mortgage-payment pressure indicator"
+    }
+  }
+}

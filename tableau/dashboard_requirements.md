@@ -15,6 +15,8 @@ Use CSVs under `data/processed/reporting` as separate logical tables. Relate the
 | `dashboard_warning_rule_detail` | firm, period, source window, product | Rule explanation and eligibility |
 | `dashboard_peer_benchmarks` | period and product | Median and quartile reference lines |
 | `dashboard_source_metric_detail` | source-cell `fact_id` | Raw-value and lineage drill-down |
+| `dashboard_economic_context` | reporting period | One BOE/ONS context row per half-year; never sum these values across firms |
+| `dashboard_product_period_context` | period and product | Product-level complaint totals, firm medians, warning workload and trends |
 
 Do not sum complaint counts from the rule-detail table: every firm-product observation has nine rule rows. Count metrics are additive only in the source metric table where `is_analysis_ready_value = True`, `is_product_level = True`, and the selected metric is additive. Never sum percentages or context rates.
 
@@ -54,6 +56,19 @@ Do not sum complaint counts from the rule-detail table: every firm-product obser
 - Source anomalies and review caveats with source-cell evidence.
 - Missingness for core metrics by period/product.
 - Link drill-down fields to source workbook, sheet, row and column; raw files remain read-only.
+
+### 6. Economic and complaint context
+
+- Relate `dashboard_economic_context` to
+  `dashboard_product_period_context` using `reporting_period`.
+- Show Bank Rate and selected ONS series in separate charts because they use
+  different concepts even where the unit is percentage points.
+- Show product complaint totals or firm medians beside—not mathematically
+  combined with—the economic indicators.
+- Display: “Economic context supports interpretation only; it does not
+  establish causation and does not change the warning score.”
+- Do not display a correlation as causal evidence. Ten half-year observations
+  are insufficient for a reliable causal model.
 
 ## Global filters
 
