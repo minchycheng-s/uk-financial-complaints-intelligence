@@ -1,131 +1,417 @@
-const github = "https://github.com/minchycheng-s/uk-financial-complaints-intelligence";
+const DEFAULT_V1 =
+  "https://public.tableau.com/views/uk_financial_complaints_intelligence_public/ExecutiveOverview?:language=en-US&:showVizHome=no";
+const DEFAULT_V2 =
+  "https://public.tableau.com/views/uk_financial_complaints_intelligence_v2_public/EconomicandComplaintContext?:language=en-US&:showVizHome=no";
 
-const styles = `
-:root{--ink:#17201d;--muted:#60706a;--paper:#f4f1e9;--card:#fffdf8;--green:#174b3c;--lime:#caef6c;--line:#d8d8cc;--orange:#f16d3a}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}a{color:inherit;text-decoration:none}.shell{width:min(1180px,calc(100% - 42px));margin:auto}
-nav{height:82px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line)}.brand{font-size:24px;font-weight:900}.brand span{color:var(--orange)}.navlinks{display:flex;align-items:center;gap:28px;font-size:14px;font-weight:650}.button{display:inline-flex;align-items:center;gap:9px;background:var(--ink);color:white;border-radius:99px;padding:13px 19px}.button.light{background:var(--lime);color:var(--ink)}
-.hero{padding:92px 0 70px}.eyebrow{text-transform:uppercase;letter-spacing:.16em;color:var(--green);font-size:12px;font-weight:800}.hero-grid{display:grid;grid-template-columns:1.4fr .6fr;gap:65px;align-items:end}.hero h1{font-family:Georgia,serif;font-size:clamp(50px,7vw,91px);font-weight:400;line-height:.94;letter-spacing:-.055em;margin:25px 0 30px}.hero h1 em{color:var(--green)}.intro{font-size:19px;line-height:1.65;color:var(--muted);max-width:670px}.hero-side{border-left:1px solid var(--line);padding-left:30px}.hero-side strong{font-family:Georgia,serif;font-size:50px;font-weight:400;display:block}.hero-side p{color:var(--muted);line-height:1.6}.actions{display:flex;gap:12px;margin-top:32px}
-.metrics{background:var(--green);color:white}.metrics-grid{display:grid;grid-template-columns:repeat(4,1fr)}.metric{padding:38px 24px;border-right:1px solid #ffffff35}.metric:last-child{border:0}.metric strong{display:block;font-family:Georgia,serif;font-size:42px;color:var(--lime)}.metric span{font-size:13px;color:#dce8e2}
-.section{padding:90px 0}.section-head{display:grid;grid-template-columns:.7fr 1.3fr;gap:45px;margin-bottom:50px}.kicker{text-transform:uppercase;letter-spacing:.13em;color:var(--orange);font-size:12px;font-weight:800}.section h2{font-family:Georgia,serif;font-size:clamp(39px,5vw,64px);font-weight:400;letter-spacing:-.04em;line-height:1;margin:0}.section-head p{font-size:18px;line-height:1.65;color:var(--muted);margin:4px 0}
-.workflow{display:grid;grid-template-columns:repeat(5,1fr);border:1px solid var(--line);background:var(--card)}.step{padding:29px 23px;min-height:210px;border-right:1px solid var(--line)}.step:last-child{border:0}.step b{color:var(--orange);font-size:12px}.step h3{font-family:Georgia,serif;font-size:27px;margin:35px 0 12px}.step p{color:var(--muted);line-height:1.55;font-size:14px}
-.findings{background:#e8e5dc}.finding-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.finding{background:var(--card);padding:34px;border-top:5px solid var(--green);min-height:250px}.finding strong{font-family:Georgia,serif;font-size:64px;color:var(--green)}.finding h3{font-size:18px}.finding p{color:var(--muted);line-height:1.65}
-.dashboard{background:#13251f;color:white;border-radius:24px;padding:28px;box-shadow:0 25px 70px #1a2d2525}.dash-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:26px}.lights{display:flex;gap:7px}.lights i{width:9px;height:9px;border-radius:50%;background:#88a59a}.dash-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:18px}.panel{background:#1c352c;border:1px solid #ffffff18;border-radius:14px;padding:22px}.panel h4{margin:0 0 22px;color:#d9e5df}.bars{height:220px;display:flex;align-items:end;gap:12px}.bar{flex:1;background:var(--lime);border-radius:7px 7px 0 0;min-height:18px}.bar:nth-child(2n){background:#f2a96d}.signals{display:grid;gap:13px}.signal{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center}.track{height:9px;background:#ffffff18;border-radius:20px;overflow:hidden}.fill{height:100%;background:var(--lime)}.signal small{color:#cbd8d3}
-.workbook-switcher{display:grid;grid-template-columns:310px 1fr;border:1px solid var(--line);background:var(--card);min-height:570px}.edition-list{border-right:1px solid var(--line);padding:18px}.edition-button{width:100%;border:0;border-bottom:1px solid var(--line);background:transparent;text-align:left;padding:20px 14px;cursor:pointer;color:var(--ink)}.edition-button:last-child{border-bottom:0}.edition-button.active{background:var(--green);color:white;border-radius:12px}.edition-button small{display:block;margin-bottom:8px;text-transform:uppercase;letter-spacing:.12em;color:var(--orange);font-weight:800}.edition-button.active small{color:var(--lime)}.edition-button strong{display:block;font-family:Georgia,serif;font-size:24px;font-weight:400}.edition-button span{display:block;margin-top:7px;font-size:13px;line-height:1.5;opacity:.74}.workbook-stage{padding:28px;min-width:0}.workbook-pane{display:none}.workbook-pane.active{display:block}.workbook-meta{display:flex;justify-content:space-between;gap:24px;align-items:start;margin-bottom:22px}.workbook-meta h3{font-family:Georgia,serif;font-size:38px;font-weight:400;margin:0 0 9px}.workbook-meta p{color:var(--muted);line-height:1.55;margin:0}.dashboard-tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}.dashboard-tab{border:1px solid var(--line);background:white;border-radius:99px;padding:9px 13px;font:inherit;font-size:12px;cursor:pointer}.dashboard-tab.active{background:var(--ink);color:white;border-color:var(--ink)}.tableau-frame{width:100%;height:390px;border:1px solid var(--line);border-radius:14px;background:#ece9e0}.publish-state{height:390px;border:1px dashed #a9ada5;border-radius:14px;background:#f4f1e9;display:grid;place-items:center;text-align:center;padding:32px}.publish-state div{max-width:520px}.publish-state b{display:block;font-family:Georgia,serif;font-size:30px;font-weight:400;margin-bottom:12px}.publish-state p{color:var(--muted);line-height:1.6}.publish-state code{display:inline-block;background:white;border:1px solid var(--line);border-radius:7px;padding:5px 8px;font-size:12px}.embed-note{margin-top:14px;color:var(--muted);font-size:12px;line-height:1.5}.status-pill{white-space:nowrap;border:1px solid var(--line);border-radius:99px;padding:9px 12px;font-size:12px;font-weight:700}.status-pill.live{background:#e4f3dd;border-color:#bdd8b2;color:#28552c}.status-pill.local{background:#fff1df;border-color:#e8cba8;color:#74421c}
-.skills{display:flex;flex-wrap:wrap;gap:10px}.chip{border:1px solid var(--line);background:var(--card);border-radius:99px;padding:10px 15px;font-size:13px}.lesson-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:38px}.lesson{padding:25px 0;border-top:1px solid var(--line)}.lesson b{color:var(--orange)}.lesson p{line-height:1.6;color:var(--muted)}
-footer{background:var(--ink);color:white;padding:70px 0}.footer-grid{display:grid;grid-template-columns:1.4fr .6fr;gap:40px;align-items:end}footer h2{font-family:Georgia,serif;font-size:50px;font-weight:400;margin:0 0 17px}footer p{color:#b8c4bf;line-height:1.6}.foot-links{display:flex;justify-content:flex-end;gap:13px}
-@media(max-width:850px){.navlinks a:not(.button){display:none}.hero-grid,.section-head,.dash-grid,.footer-grid,.workbook-switcher{grid-template-columns:1fr}.hero-side{border-left:0;border-top:1px solid var(--line);padding:25px 0 0}.metrics-grid{grid-template-columns:1fr 1fr}.metric:nth-child(2){border-right:0}.workflow{grid-template-columns:1fr}.step{border-right:0;border-bottom:1px solid var(--line);min-height:0}.finding-grid,.lesson-grid{grid-template-columns:1fr}.edition-list{border-right:0;border-bottom:1px solid var(--line)}.workbook-meta{display:block}.status-pill{display:inline-block;margin-top:14px}.foot-links{justify-content:flex-start}.hero{padding-top:65px}}@media(max-width:520px){.shell{width:min(100% - 26px,1180px)}.metrics-grid{grid-template-columns:1fr}.metric{border-right:0;border-bottom:1px solid #ffffff35}.actions{flex-direction:column;align-items:flex-start}.workbook-stage{padding:18px}.tableau-frame,.publish-state{height:500px}}
-`;
+function escapeHtml(value) {
+  return String(value ?? "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
 
-const escapeHtml = (value) => String(value || "")
-  .replaceAll("&", "&amp;")
-  .replaceAll("<", "&lt;")
-  .replaceAll(">", "&gt;")
-  .replaceAll('"', "&quot;");
-
-const tableauUrl = (value) => {
+function tableauUrl(value, fallback) {
   try {
-    const url = new URL(value);
-    if (url.protocol !== "https:") return "";
-    if (!url.searchParams.has(":showVizHome")) url.searchParams.set(":showVizHome", "no");
-    return escapeHtml(url.toString());
+    const url = new URL(value || fallback);
+    if (url.protocol !== "https:" || url.hostname !== "public.tableau.com") {
+      return fallback;
+    }
+    url.searchParams.set(":showVizHome", "no");
+    return url.toString();
   } catch {
-    return "";
+    return fallback;
   }
-};
+}
 
-const tableauStage = (url, edition) => url
-  ? `<iframe class="tableau-frame" title="${edition} interactive Tableau workbook" src="${url}" loading="lazy" allowfullscreen></iframe>
-     <p class="embed-note">Interactive view served by Tableau. Use its toolbar to filter, inspect tooltips and open the full workbook.</p>`
-  : `<div class="publish-state"><div><b>Workbook ready; publication required</b><p>The local Tableau workbook has been verified, but a <code>.twb/.twbx</code> file cannot run inside a browser. Publish this edition to Tableau Public or Tableau Cloud, then connect its view URL to enable the live embed.</p><a class="button" href="${github}/tree/main/data/processed/reporting/presentation" target="_blank" rel="noreferrer">View workbook files ↗</a></div></div>
-     <p class="embed-note">No static screenshot is presented as “interactive.” The portfolio activates the real Tableau view when a published URL is supplied.</p>`;
-
-const renderHtml = (v1Url = "", v2Url = "") => `<!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="A data analytics portfolio case study transforming FCA complaints workbooks into transparent, reviewable customer-harm intelligence."><title>UK Financial Complaints Intelligence</title><style>${styles}</style></head>
+function renderHtml(v1Url, v2Url) {
+  const v1 = escapeHtml(v1Url);
+  const v2 = escapeHtml(v2Url);
+  return `<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="An evidence-led UK financial complaints intelligence case study: prioritising which firm-product cases analysts should investigate first." />
+  <title>UK Financial Complaints Intelligence — Business Case Study</title>
+  <style>
+    :root {
+      --ink: #14213d;
+      --navy: #0b2942;
+      --paper: #f7f3eb;
+      --card: #fffdf8;
+      --orange: #ed6a2c;
+      --amber: #f2b544;
+      --red: #c8483f;
+      --green: #1b6b5a;
+      --muted: #5d675f;
+      --line: #d9d3c7;
+      --blue-pale: #e5eef2;
+      --orange-pale: #fbe8dc;
+      --shadow: 0 18px 45px rgba(20, 33, 61, .09);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        linear-gradient(rgba(20,33,61,.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(20,33,61,.025) 1px, transparent 1px),
+        var(--paper);
+      background-size: 40px 40px;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.55;
+    }
+    a { color: inherit; }
+    .wrap { width: min(1180px, calc(100% - 40px)); margin: 0 auto; }
+    nav {
+      position: sticky; top: 0; z-index: 20;
+      background: rgba(247,243,235,.94);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(14px);
+    }
+    .nav-inner { min-height: 66px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .brand { font-weight: 850; letter-spacing: -.02em; text-decoration: none; }
+    .nav-links { display: flex; flex-wrap: wrap; gap: 18px; font-size: .9rem; }
+    .nav-links a { text-decoration: none; color: var(--muted); }
+    .nav-links a:hover { color: var(--orange); }
+    .hero { padding: 90px 0 54px; }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 9px;
+      color: var(--orange); font-size: .8rem; font-weight: 850;
+      letter-spacing: .13em; text-transform: uppercase;
+    }
+    .eyebrow::before { content: ""; width: 28px; height: 3px; background: currentColor; }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 {
+      max-width: 980px; margin: 20px 0 22px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(3rem, 7.2vw, 6.2rem); line-height: .98; letter-spacing: -.055em;
+    }
+    .lead { max-width: 810px; font-size: clamp(1.08rem, 2vw, 1.35rem); color: var(--muted); }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+    .button {
+      display: inline-flex; align-items: center; justify-content: center;
+      min-height: 48px; padding: 0 19px; border: 1px solid var(--ink);
+      border-radius: 999px; font-weight: 760; text-decoration: none;
+      background: var(--ink); color: white;
+    }
+    .button.secondary { background: transparent; color: var(--ink); }
+    .button:hover { transform: translateY(-1px); box-shadow: 0 8px 22px rgba(20,33,61,.12); }
+    .outcome-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      border: 1px solid var(--line); background: var(--card); box-shadow: var(--shadow);
+    }
+    .outcome { padding: 24px; border-right: 1px solid var(--line); }
+    .outcome:last-child { border-right: 0; }
+    .outcome strong { display: block; font-family: Georgia, serif; font-size: 2.55rem; line-height: 1; }
+    .outcome span { display: block; margin-top: 9px; color: var(--muted); font-size: .92rem; }
+    section { padding: 78px 0; }
+    .section-head { display: grid; grid-template-columns: .8fr 1.2fr; gap: 70px; margin-bottom: 36px; align-items: end; }
+    h2 { font-family: Georgia, serif; font-size: clamp(2.2rem, 4vw, 4rem); line-height: 1.04; letter-spacing: -.04em; }
+    .section-head p { color: var(--muted); font-size: 1.05rem; margin-bottom: 6px; }
+    .problem-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
+    .problem-card, .story, .action-card, .skill-card {
+      background: var(--card); border: 1px solid var(--line); box-shadow: var(--shadow);
+    }
+    .problem-card { padding: 22px; min-height: 230px; }
+    .number { color: var(--orange); font-weight: 850; font-size: .8rem; letter-spacing: .12em; }
+    .problem-card h3 { margin: 42px 0 10px; font-size: 1.08rem; }
+    .problem-card p { color: var(--muted); font-size: .91rem; margin: 0; }
+    .stories { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .story { padding: 29px; border-top: 5px solid var(--orange); }
+    .story:nth-child(2) { border-top-color: var(--amber); }
+    .story:nth-child(3) { border-top-color: var(--green); }
+    .story:nth-child(4) { border-top-color: var(--red); }
+    .story-tag { font-size: .75rem; font-weight: 850; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+    .story h3 { font-family: Georgia, serif; font-size: 1.75rem; line-height: 1.13; margin: 10px 0 22px; }
+    .evidence { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 18px 0; }
+    .evidence div { padding: 15px; background: var(--paper); border-left: 3px solid var(--orange); }
+    .evidence strong { display: block; font-size: 1.45rem; }
+    .evidence span { color: var(--muted); font-size: .82rem; }
+    .decision { margin: 18px 0 0; padding-top: 16px; border-top: 1px solid var(--line); }
+    .decision b { color: var(--green); }
+    .anomaly {
+      display: grid; grid-template-columns: 1fr auto 1fr auto 1fr; align-items: center; gap: 18px;
+      padding: 34px; background: var(--navy); color: white; box-shadow: var(--shadow);
+    }
+    .anomaly-value { text-align: center; }
+    .anomaly-value strong { display: block; font-family: Georgia, serif; font-size: clamp(2.2rem, 5vw, 4.6rem); }
+    .anomaly-value span { color: #bed0d7; font-size: .9rem; }
+    .operator { font-size: 2.2rem; color: var(--amber); }
+    .anomaly-note { margin-top: 18px; padding: 17px 20px; background: var(--orange-pale); border-left: 4px solid var(--red); }
+    .flow { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; }
+    .flow-step { position: relative; padding: 25px 24px 25px 18px; background: var(--card); border: 1px solid var(--line); }
+    .flow-step:not(:last-child)::after {
+      content: "→"; position: absolute; right: -13px; top: 50%; z-index: 2;
+      width: 26px; height: 26px; display: grid; place-items: center;
+      border-radius: 50%; background: var(--orange); color: white; transform: translateY(-50%);
+    }
+    .flow-step strong { display: block; margin-bottom: 9px; }
+    .flow-step span { color: var(--muted); font-size: .87rem; }
+    .actions { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+    .action-card { display: grid; grid-template-columns: 56px 1fr; gap: 18px; padding: 23px; }
+    .action-icon { width: 48px; height: 48px; display: grid; place-items: center; border-radius: 50%; background: var(--blue-pale); color: var(--navy); font-weight: 900; }
+    .action-card h3 { margin-bottom: 6px; }
+    .action-card p { color: var(--muted); margin: 0; }
+    .limits { background: var(--navy); color: white; }
+    .limits .section-head p { color: #c2d1d7; }
+    .limit-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .limit-list div { padding: 21px; border: 1px solid rgba(255,255,255,.2); color: #d6e0e4; }
+    .limit-list b { color: white; }
+    .dashboard-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .dashboard-card { padding: 20px; border: 1px solid var(--line); background: var(--card); box-shadow: var(--shadow); }
+    .dashboard-card h3 { font-family: Georgia, serif; font-size: 1.7rem; margin: 0 0 7px; }
+    .dashboard-card p { color: var(--muted); min-height: 50px; }
+    .viz-frame { position: relative; width: 100%; aspect-ratio: 16 / 10; background: var(--blue-pale); overflow: hidden; border: 1px solid var(--line); }
+    .viz-frame iframe { width: 100%; height: 100%; border: 0; }
+    .dashboard-links { display: flex; gap: 10px; margin-top: 14px; }
+    .dashboard-links a { font-weight: 760; color: var(--orange); }
+    .skills { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+    .skill-card { padding: 22px; }
+    .skill-card h3 { font-size: 1rem; margin-bottom: 9px; }
+    .skill-card p { color: var(--muted); font-size: .9rem; margin: 0; }
+    footer { padding: 34px 0 54px; border-top: 1px solid var(--line); color: var(--muted); }
+    .footer-inner { display: flex; justify-content: space-between; gap: 24px; align-items: center; }
+    .footer-inner a { color: var(--ink); font-weight: 760; }
+    @media (max-width: 950px) {
+      .outcome-grid, .problem-grid, .skills { grid-template-columns: 1fr 1fr; }
+      .section-head { grid-template-columns: 1fr; gap: 10px; }
+      .flow { grid-template-columns: 1fr; gap: 8px; }
+      .flow-step:not(:last-child)::after { content: "↓"; right: 18px; top: auto; bottom: -17px; transform: none; }
+      .limit-list { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 680px) {
+      .wrap { width: min(100% - 24px, 1180px); }
+      .nav-links { display: none; }
+      .hero { padding-top: 58px; }
+      .outcome-grid, .problem-grid, .stories, .actions, .dashboard-grid, .skills, .limit-list { grid-template-columns: 1fr; }
+      .outcome { border-right: 0; border-bottom: 1px solid var(--line); }
+      .anomaly { grid-template-columns: 1fr; }
+      .operator { transform: rotate(90deg); text-align: center; }
+      .footer-inner { align-items: flex-start; flex-direction: column; }
+    }
+  </style>
+</head>
 <body>
-<nav class="shell"><a class="brand" href="#top">MC<span>.</span></a><div class="navlinks"><a href="#case">Case study</a><a href="#findings">Findings</a><a href="#tableau">Dashboards</a><a href="#method">Method</a><a class="button" href="${github}" target="_blank" rel="noreferrer">View GitHub ↗</a></div></nav>
-<main>
-<section class="hero shell" id="top"><div class="eyebrow">Data analytics portfolio · FCA complaints</div><div class="hero-grid"><div><h1>From difficult Excel files to <em>decision-ready intelligence.</em></h1><p class="intro">An end-to-end analytics project that profiles, extracts and validates UK firm-level complaints data—then turns it into explainable early-warning signals and Tableau dashboards.</p><div class="actions"><a class="button" href="#case">Explore the case study ↓</a><a class="button light" href="${github}" target="_blank" rel="noreferrer">Open repository ↗</a></div></div><aside class="hero-side"><strong>2021–25</strong><p>Ten half-year reporting periods, reconciled into one analysis-ready model with source-cell lineage.</p></aside></div></section>
-<section class="metrics"><div class="shell metrics-grid"><div class="metric"><strong>75,231</strong><span>source metric records</span></div><div class="metric"><strong>5,751</strong><span>firm-product-period observations</span></div><div class="metric"><strong>10</strong><span>half-year reporting periods</span></div><div class="metric"><strong>85</strong><span>automated tests</span></div></div></section>
-<section class="section shell" id="case"><div class="section-head"><div><div class="kicker">The challenge</div><h2>Structure first. Analysis second.</h2></div><p>The FCA workbooks changed across periods, mixed multiple metric types, used special missing markers and embedded business meaning in formatting. The solution preserves every raw file, discovers layouts programmatically and records every transformation.</p></div><div class="workflow">${[
-  ["01","Profile","Discover workbook structures, sheets, headers and schema drift."],
-  ["02","Extract","Standardise period-specific Excel layouts without changing raw files."],
-  ["03","Validate","Reconcile totals, preserve lineage and surface quality exceptions."],
-  ["04","Analyse","Build peer benchmarks, transparent signals and review queues."],
-  ["05","Explain","Connect every dashboard result to its rule and source cell."]
-].map(x=>`<article class="step"><b>${x[0]}</b><h3>${x[1]}</h3><p>${x[2]}</p></article>`).join("")}</div></section>
-<section class="section findings" id="findings"><div class="shell"><div class="section-head"><div><div class="kicker">Selected findings</div><h2>A focused queue—not an automated verdict.</h2></div><p>The warning framework separates signals, insufficient evidence and confirmed source anomalies. Results support human prioritisation and are explicitly not findings of misconduct or customer harm.</p></div><div class="finding-grid"><article class="finding"><strong>13</strong><h3>Latest priority observations</h3><p>A focused investigation queue across 13 firms in 2025-H2.</p></article><article class="finding"><strong>71</strong><h3>Insufficient-evidence observations</h3><p>Kept separate from no-current-signal results to avoid false reassurance.</p></article><article class="finding"><strong>1</strong><h3>Confirmed source anomaly</h3><p>Preserved exactly as published and excluded from misleading derivations.</p></article></div></div></section>
-<section class="section shell"><div class="section-head"><div><div class="kicker">Decision layer</div><h2>Signals that can be traced and challenged.</h2></div><p>Peer position, trend deterioration, persistence and data sufficiency are visible together. Reviewers can move from a portfolio signal to its rule definition and original workbook cell.</p></div><div class="dashboard"><div class="dash-top"><strong>Executive overview · 2025-H2</strong><div class="lights"><i></i><i></i><i></i></div></div><div class="dash-grid"><div class="panel"><h4>Warning trend</h4><div class="bars">${[38,52,49,61,55,67,59,73,65,78].map(h=>`<span class="bar" style="height:${h}%"></span>`).join("")}</div></div><div class="panel"><h4>Latest product signals</h4><div class="signals">${[["Insurance & protection",92],["Consumer credit",70],["Investments",52],["Home finance",39],["Banking & cards",34]].map(x=>`<div class="signal"><div><small>${x[0]}</small><div class="track"><div class="fill" style="width:${x[1]}%"></div></div></div><b>${x[1]}</b></div>`).join("")}</div></div></div></div></section>
-<section class="section shell" id="tableau"><div class="section-head"><div><div class="kicker">Tableau workbooks</div><h2>Two editions, one governed story.</h2></div><p>The first workbook covers portfolio monitoring, drill-down, review and data quality. The second adds Bank of England and ONS context without changing the warning score. Choose an edition to inspect its dashboard inventory and launch the published interactive view.</p></div>
-  <div class="workbook-switcher">
-    <div class="edition-list" role="tablist" aria-label="Tableau workbook editions">
-      <button class="edition-button active" type="button" data-edition="v1" role="tab" aria-selected="true"><small>Workbook v1</small><strong>Complaints intelligence</strong><span>Five dashboards · operational monitoring and explainability</span></button>
-      <button class="edition-button" type="button" data-edition="v2" role="tab" aria-selected="false"><small>Workbook v2</small><strong>External context</strong><span>One dashboard · Bank Rate, inflation and complaint trends</span></button>
+  <nav>
+    <div class="wrap nav-inner">
+      <a class="brand" href="#top">Complaints Intelligence</a>
+      <div class="nav-links">
+        <a href="#problems">Problems solved</a>
+        <a href="#findings">Evidence</a>
+        <a href="#actions">Decisions</a>
+        <a href="#dashboards">Dashboards</a>
+      </div>
     </div>
-    <div class="workbook-stage">
-      <article class="workbook-pane active" data-pane="v1" role="tabpanel">
-        <div class="workbook-meta"><div><h3>Complaints intelligence suite</h3><p>Portfolio overview, firm-product exploration, priority review, rule evidence and source-level quality controls.</p></div><span class="status-pill ${v1Url ? "live" : "local"}">${v1Url ? "Live interactive view" : "Local workbook"}</span></div>
-        <div class="dashboard-tabs" aria-label="Version 1 dashboards">${[
-          ["Executive Overview", "ExecutiveOverview"],
-          ["Firm Product Explorer", "FirmandProductExplorer"],
-          ["Priority Review Queue", "PriorityReviewQueue"],
-          ["Rule Explanation", "WarningRuleExplanation"],
-          ["Data Quality and Coverage", "DataQualityandCoverage"],
-        ].map(([name, view], index)=>`<button class="dashboard-tab${index===0?" active":""}" type="button" data-tableau-view="${view}">${name}</button>`).join("")}</div>
-        ${tableauStage(v1Url, "Version 1")}
-      </article>
-      <article class="workbook-pane" data-pane="v2" role="tabpanel">
-        <div class="workbook-meta"><div><h3>Economic and complaint context</h3><p>Bank Rate, CPI, CPIH and FCA complaint volumes aligned to the same half-year periods, with an explicit non-causation notice.</p></div><span class="status-pill ${v2Url ? "live" : "local"}">${v2Url ? "Live interactive view" : "Local workbook"}</span></div>
-        <div class="dashboard-tabs"><button class="dashboard-tab active" type="button">Economic and Complaint Context</button></div>
-        ${tableauStage(v2Url, "Version 2")}
-      </article>
-    </div>
-  </div>
-</section>
-<section class="section shell" id="method"><div class="section-head"><div><div class="kicker">Tools and judgement</div><h2>Built like a production analytics project.</h2></div><p>Reusable Python modules, governed mappings, automated validation and documented analytical limitations make the work reproducible—not merely presentable.</p></div><div class="skills">${["Python","pandas","openpyxl","pytest","Tableau","Data profiling","Data modelling","Quality assurance","Risk analytics","Governance"].map(x=>`<span class="chip">${x}</span>`).join("")}</div><div class="lesson-grid"><div class="lesson"><b>01</b><h3>Respect source meaning</h3><p>Percentages, rates and counts remain distinct even when labels appear similar.</p></div><div class="lesson"><b>02</b><h3>Make uncertainty visible</h3><p>Missing evidence is not translated into low risk or a zero.</p></div><div class="lesson"><b>03</b><h3>Keep humans accountable</h3><p>Rules prioritise review; documented judgement determines action.</p></div></div></section>
-</main><footer><div class="shell footer-grid"><div><h2>Explore the complete project.</h2><p>Read the methodology, tests, governance documentation and reusable source code on GitHub.</p></div><div class="foot-links"><a class="button light" href="${github}" target="_blank" rel="noreferrer">View repository ↗</a></div></div></footer>
-<script>
-document.querySelectorAll(".edition-button").forEach(button => {
-  button.addEventListener("click", () => {
-    document.querySelectorAll(".edition-button").forEach(item => {
-      const active = item === button;
-      item.classList.toggle("active", active);
-      item.setAttribute("aria-selected", String(active));
-    });
-    document.querySelectorAll(".workbook-pane").forEach(pane => pane.classList.toggle("active", pane.dataset.pane === button.dataset.edition));
-  });
-});
-document.querySelectorAll(".dashboard-tabs").forEach(group => {
-  group.querySelectorAll(".dashboard-tab").forEach(tab => tab.addEventListener("click", () => {
-    group.querySelectorAll(".dashboard-tab").forEach(item => item.classList.toggle("active", item === tab));
-    const frame = group.closest(".workbook-pane")?.querySelector(".tableau-frame");
-    const view = tab.dataset.tableauView;
-    if (!frame || !view) return;
+  </nav>
 
-    const nextUrl = new URL(frame.src);
-    const pathParts = nextUrl.pathname.split("/");
-    pathParts[pathParts.length - 1] = view;
-    nextUrl.pathname = pathParts.join("/");
-    frame.src = nextUrl.toString();
-  }));
-});
-</script>
-</body></html>`;
+  <main id="top">
+    <header class="hero wrap">
+      <span class="eyebrow">Evidence-led data analytics case study</span>
+      <h1>Which complaints cases should analysts investigate first—and why?</h1>
+      <p class="lead">I built a traceable review system for UK financial complaints data. It converts inconsistent regulatory workbooks into a prioritised queue, while keeping missing evidence, source anomalies and analytical limits visible.</p>
+      <div class="hero-actions">
+        <a class="button" href="#findings">See the decisions</a>
+        <a class="button secondary" href="https://github.com/minchycheng-s/uk-financial-complaints-intelligence" target="_blank" rel="noreferrer">View code and methodology</a>
+      </div>
+    </header>
+
+    <div class="wrap outcome-grid" aria-label="Latest reporting period outcomes">
+      <div class="outcome"><strong>578</strong><span>firm-product observations assessed in 2025-H2</span></div>
+      <div class="outcome"><strong>126</strong><span>observations justified review—21.8% of the period</span></div>
+      <div class="outcome"><strong>13</strong><span>highest-priority observations to investigate first</span></div>
+      <div class="outcome"><strong>71</strong><span>classified as insufficient data, not mistaken for low risk</span></div>
+    </div>
+
+    <section id="problems">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>The problem was decision quality, not a lack of charts.</h2>
+          <p>Regulatory complaint data is useful only when analysts can compare like with like, find the cases that deserve attention and trace every signal back to evidence.</p>
+        </div>
+        <div class="problem-grid">
+          <article class="problem-card"><span class="number">01</span><h3>Limited review capacity</h3><p>Hundreds of observations compete for attention. The output must tell reviewers where to start.</p></article>
+          <article class="problem-card"><span class="number">02</span><h3>Large-firm bias</h3><p>Raw totals naturally favour large firms, so peer position and contextual rates are needed alongside counts.</p></article>
+          <article class="problem-card"><span class="number">03</span><h3>Changing Excel layouts</h3><p>Headers, sheets and definitions change between reporting periods, threatening valid comparisons.</p></article>
+          <article class="problem-card"><span class="number">04</span><h3>Missing ≠ safe</h3><p>Unavailable evidence must remain “insufficient data”; it must never silently become zero or low risk.</p></article>
+          <article class="problem-card"><span class="number">05</span><h3>Scores need proof</h3><p>A warning without its rule, source workbook and cell lineage is not defensible in review.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="findings">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>Four business questions answered with evidence.</h2>
+          <p>Each result is framed as a review decision—not as proof of misconduct, customer harm or causation.</p>
+        </div>
+        <div class="stories">
+          <article class="story">
+            <span class="story-tag">Question 1 · Capacity</span>
+            <h3>Which cases should analysts review first?</h3>
+            <p>The warning framework separates the latest period into actionable groups instead of producing an undifferentiated ranked list.</p>
+            <div class="evidence"><div><strong>13</strong><span>highest priority</span></div><div><strong>113</strong><span>additional review</span></div></div>
+            <p class="decision"><b>Decision:</b> investigate the 13 highest-priority observations first, then work through the remaining 113 review cases.</p>
+          </article>
+          <article class="story">
+            <span class="story-tag">Question 2 · Workload</span>
+            <h3>Where is review demand concentrated?</h3>
+            <p>Counts identify workload; rates identify concentration. Both are needed to allocate review capacity fairly.</p>
+            <div class="evidence"><div><strong>7 / 163</strong><span>Insurance & pure protection · 4.3%</span></div><div><strong>3 / 63</strong><span>Decumulation & pensions · 4.8%</span></div></div>
+            <p class="decision"><b>Decision:</b> insurance creates the largest workload by count, while pensions has a slightly higher priority concentration.</p>
+          </article>
+          <article class="story">
+            <span class="story-tag">Question 3 · Change</span>
+            <h3>What drove the latest complaint increase?</h3>
+            <p>Total complaints opened increased sharply, but the movement was not broad-based across every product group.</p>
+            <div class="evidence"><div><strong>+56.1%</strong><span>all complaints opened, H1 to H2 2025</span></div><div><strong>+116.7%</strong><span>Consumer Credit</span></div></div>
+            <p>Other product groups combined fell by roughly 5.0%.</p>
+            <p class="decision"><b>Decision:</b> verify Consumer Credit definitions, comparability and reporting population before making an operational or risk conclusion.</p>
+          </article>
+          <article class="story">
+            <span class="story-tag">Question 4 · Guardrails</span>
+            <h3>How do we avoid false reassurance?</h3>
+            <p>The model explicitly separates incomplete evidence and confirmed source anomalies from normal scoring.</p>
+            <div class="evidence"><div><strong>71</strong><span>insufficient-data observations</span></div><div><strong>1</strong><span>confirmed source anomaly</span></div></div>
+            <p class="decision"><b>Decision:</b> treat incomplete evidence as a review limitation and require documented business treatment for the source anomaly.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <div class="section-head">
+          <h2>A source anomaly the pipeline refused to hide.</h2>
+          <p>For one UK Warranty observation, separate source sheets contained closure percentages that added to more than 100%. The extraction was correct; the source values were internally inconsistent.</p>
+        </div>
+        <div class="anomaly">
+          <div class="anomaly-value"><strong>88.35%</strong><span>closed within 3 days</span></div>
+          <div class="operator">+</div>
+          <div class="anomaly-value"><strong>30.12%</strong><span>closed after 3 days, within 8 weeks</span></div>
+          <div class="operator">=</div>
+          <div class="anomaly-value"><strong>118.47%</strong><span>invalid combined timeliness</span></div>
+        </div>
+        <p class="anomaly-note"><b>Treatment:</b> preserve the reported values, flag the inconsistency and do not use the derived timeliness measure until the business defines an appropriate treatment.</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <div class="section-head">
+          <h2>How raw files became defensible decisions.</h2>
+          <p>The pipeline was designed for auditability: every transformation and warning remains explainable.</p>
+        </div>
+        <div class="flow">
+          <div class="flow-step"><strong>1. Profile</strong><span>Discover workbooks, sheets, headers, types, missingness and schema changes.</span></div>
+          <div class="flow-step"><strong>2. Extract</strong><span>Use sheet-specific rules without altering the raw Excel files.</span></div>
+          <div class="flow-step"><strong>3. Reconcile</strong><span>Standardise firms and products, then check totals and rejected records.</span></div>
+          <div class="flow-step"><strong>4. Compare</strong><span>Create period change, peer percentile and contextual features.</span></div>
+          <div class="flow-step"><strong>5. Prioritise</strong><span>Apply transparent rules and retain workbook, sheet, row, column and cell evidence.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="actions">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>What a manager can do next.</h2>
+          <p>The analysis supports focused investigation and data-quality decisions. It does not replace judgement.</p>
+        </div>
+        <div class="actions">
+          <article class="action-card"><div class="action-icon">1</div><div><h3>Open the top-priority cases</h3><p>Begin with the 13 highest-priority observations and inspect the triggered rules and underlying evidence.</p></div></article>
+          <article class="action-card"><div class="action-icon">2</div><div><h3>Allocate review capacity deliberately</h3><p>Use both the number of priority cases and their concentration rate when planning product-specialist workload.</p></div></article>
+          <article class="action-card"><div class="action-icon">3</div><div><h3>Validate the Consumer Credit jump</h3><p>Check reporting scope, definitions and population changes before interpreting the 116.7% increase.</p></div></article>
+          <article class="action-card"><div class="action-icon">4</div><div><h3>Resolve evidence limitations</h3><p>Keep insufficient-data cases separate and document a treatment before using the anomalous timeliness measure.</p></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="limits">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>What this analysis does not claim.</h2>
+          <p>These boundaries are part of the solution. A trustworthy analyst states what the available data cannot prove.</p>
+        </div>
+        <div class="limit-list">
+          <div><b>No proof of harm.</b> A priority signal is a reason to investigate, not a finding of customer harm or misconduct.</div>
+          <div><b>No severity measure.</b> The data does not fully describe individual customer loss, redress or complaint seriousness.</div>
+          <div><b>No causal claim.</b> Bank Rate and inflation provide context only; parallel movement does not establish causation.</div>
+          <div><b>No “no signal = safe”.</b> A quiet result may reflect insufficient evidence or rule coverage.</div>
+          <div><b>No automatic breach finding.</b> The framework does not determine regulatory non-compliance.</div>
+          <div><b>No product-group judgement.</b> Higher counts do not prove a product group is inherently worse.</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="dashboards">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>Explore the published evidence.</h2>
+          <p>These are direct Tableau Public views. Workbook navigation stays inside Tableau, avoiding duplicate portfolio controls.</p>
+        </div>
+        <div class="dashboard-grid">
+          <article class="dashboard-card">
+            <h3>Complaints intelligence suite</h3>
+            <p>Executive overview, priority review, firm-product exploration, rule explanation and data-quality controls.</p>
+            <div class="viz-frame"><iframe src="${v1}" title="Complaints intelligence Tableau workbook" loading="lazy" allowfullscreen></iframe></div>
+            <div class="dashboard-links"><a href="${v1}" target="_blank" rel="noreferrer">Open full workbook ↗</a></div>
+          </article>
+          <article class="dashboard-card">
+            <h3>Economic and complaint context</h3>
+            <p>Bank Rate, CPI/CPIH inflation and product-level complaint movement shown as context, not causation.</p>
+            <div class="viz-frame"><iframe src="${v2}" title="Economic and complaint context Tableau workbook" loading="lazy" allowfullscreen></iframe></div>
+            <div class="dashboard-links"><a href="${v2}" target="_blank" rel="noreferrer">Open full workbook ↗</a></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <div class="section-head">
+          <h2>Capabilities demonstrated.</h2>
+          <p>The project shows an end-to-end analytical approach: define the decision, engineer trustworthy data, analyse it carefully and communicate an actionable result.</p>
+        </div>
+        <div class="skills">
+          <article class="skill-card"><h3>Business problem framing</h3><p>Turned a broad “early warning” brief into a concrete prioritisation question and review workflow.</p></article>
+          <article class="skill-card"><h3>Data engineering</h3><p>Built reusable Python profiling, extraction, reconciliation and analysis-ready table pipelines.</p></article>
+          <article class="skill-card"><h3>Analytical reasoning</h3><p>Used peer groups, time change, evidence sufficiency and transparent rules without overstating conclusions.</p></article>
+          <article class="skill-card"><h3>Data quality governance</h3><p>Preserved raw values, source-cell lineage, exception decisions, review gates and methodological caveats.</p></article>
+          <article class="skill-card"><h3>Entity resolution</h3><p>Resolved firm identity across periods with suggestions, manual review and retained unresolved cases.</p></article>
+          <article class="skill-card"><h3>Dashboard design</h3><p>Created Tableau views for executives, reviewers, investigators and data-quality monitoring.</p></article>
+          <article class="skill-card"><h3>Testing and reproducibility</h3><p>Added automated tests, documented methods and version-controlled the complete workflow.</p></article>
+          <article class="skill-card"><h3>Plain-English communication</h3><p>Separated evidence, interpretation, decision and limitation so non-specialists can act responsibly.</p></article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-inner">
+      <div><b>UK Financial Complaints Intelligence</b><br />Portfolio case study · analytical prioritisation only</div>
+      <a href="https://github.com/minchycheng-s/uk-financial-complaints-intelligence" target="_blank" rel="noreferrer">Repository and documentation ↗</a>
+    </div>
+  </footer>
+</body>
+</html>`;
+}
 
 export default {
-  async fetch(request, env) {
-    const url = new URL(request.url);
-    if (url.pathname === "/health") {
-      return new Response("ok", { headers: { "content-type": "text/plain" } });
-    }
-    return new Response(renderHtml(
-      tableauUrl(env?.TABLEAU_V1_URL),
-      tableauUrl(env?.TABLEAU_V2_URL),
-    ), {
+  async fetch(_request, env) {
+    const v1 = tableauUrl(env.TABLEAU_V1_URL, DEFAULT_V1);
+    const v2 = tableauUrl(env.TABLEAU_V2_URL, DEFAULT_V2);
+    return new Response(renderHtml(v1, v2), {
       headers: {
         "content-type": "text/html; charset=utf-8",
         "cache-control": "public, max-age=300",
-        "x-content-type-options": "nosniff",
+        "content-security-policy":
+          "default-src 'self'; style-src 'unsafe-inline'; frame-src https://public.tableau.com; img-src 'self' data:; script-src 'none'; base-uri 'none'; frame-ancestors 'none'",
         "referrer-policy": "strict-origin-when-cross-origin",
+        "x-content-type-options": "nosniff",
       },
     });
   },
