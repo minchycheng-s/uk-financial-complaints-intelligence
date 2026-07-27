@@ -20,6 +20,11 @@ data/interim/
 data/metadata/
 data/processed/*
 
+# Keep the compact evidence table cited by the business reports
+!data/processed/analysis/
+data/processed/analysis/*
+!data/processed/analysis/business_question_evidence.csv
+
 # Keep the final Tableau deliverables
 !data/processed/reporting/
 data/processed/reporting/*

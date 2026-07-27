@@ -244,6 +244,12 @@ latest-period findings, persistent cases, recommended actions and limitations
 directly from the validated reporting tables; Tableau is not required to
 reproduce those conclusions.
 
+The current decision-focused analysis is in
+[`docs/business_analysis.md`](docs/business_analysis.md). It answers six
+business questions with explicit periods, denominators, source files and
+caveats. Its machine-readable evidence register is
+[`data/processed/analysis/business_question_evidence.csv`](data/processed/analysis/business_question_evidence.csv).
+
 ## Govern management actions and approvals
 
 Phase 3 turns the findings into a controlled action register without implying
