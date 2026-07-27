@@ -10,15 +10,39 @@ nav{height:82px;display:flex;align-items:center;justify-content:space-between;bo
 .workflow{display:grid;grid-template-columns:repeat(5,1fr);border:1px solid var(--line);background:var(--card)}.step{padding:29px 23px;min-height:210px;border-right:1px solid var(--line)}.step:last-child{border:0}.step b{color:var(--orange);font-size:12px}.step h3{font-family:Georgia,serif;font-size:27px;margin:35px 0 12px}.step p{color:var(--muted);line-height:1.55;font-size:14px}
 .findings{background:#e8e5dc}.finding-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.finding{background:var(--card);padding:34px;border-top:5px solid var(--green);min-height:250px}.finding strong{font-family:Georgia,serif;font-size:64px;color:var(--green)}.finding h3{font-size:18px}.finding p{color:var(--muted);line-height:1.65}
 .dashboard{background:#13251f;color:white;border-radius:24px;padding:28px;box-shadow:0 25px 70px #1a2d2525}.dash-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:26px}.lights{display:flex;gap:7px}.lights i{width:9px;height:9px;border-radius:50%;background:#88a59a}.dash-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:18px}.panel{background:#1c352c;border:1px solid #ffffff18;border-radius:14px;padding:22px}.panel h4{margin:0 0 22px;color:#d9e5df}.bars{height:220px;display:flex;align-items:end;gap:12px}.bar{flex:1;background:var(--lime);border-radius:7px 7px 0 0;min-height:18px}.bar:nth-child(2n){background:#f2a96d}.signals{display:grid;gap:13px}.signal{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center}.track{height:9px;background:#ffffff18;border-radius:20px;overflow:hidden}.fill{height:100%;background:var(--lime)}.signal small{color:#cbd8d3}
+.workbook-switcher{display:grid;grid-template-columns:310px 1fr;border:1px solid var(--line);background:var(--card);min-height:570px}.edition-list{border-right:1px solid var(--line);padding:18px}.edition-button{width:100%;border:0;border-bottom:1px solid var(--line);background:transparent;text-align:left;padding:20px 14px;cursor:pointer;color:var(--ink)}.edition-button:last-child{border-bottom:0}.edition-button.active{background:var(--green);color:white;border-radius:12px}.edition-button small{display:block;margin-bottom:8px;text-transform:uppercase;letter-spacing:.12em;color:var(--orange);font-weight:800}.edition-button.active small{color:var(--lime)}.edition-button strong{display:block;font-family:Georgia,serif;font-size:24px;font-weight:400}.edition-button span{display:block;margin-top:7px;font-size:13px;line-height:1.5;opacity:.74}.workbook-stage{padding:28px;min-width:0}.workbook-pane{display:none}.workbook-pane.active{display:block}.workbook-meta{display:flex;justify-content:space-between;gap:24px;align-items:start;margin-bottom:22px}.workbook-meta h3{font-family:Georgia,serif;font-size:38px;font-weight:400;margin:0 0 9px}.workbook-meta p{color:var(--muted);line-height:1.55;margin:0}.dashboard-tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}.dashboard-tab{border:1px solid var(--line);background:white;border-radius:99px;padding:9px 13px;font:inherit;font-size:12px;cursor:pointer}.dashboard-tab.active{background:var(--ink);color:white;border-color:var(--ink)}.tableau-frame{width:100%;height:390px;border:1px solid var(--line);border-radius:14px;background:#ece9e0}.publish-state{height:390px;border:1px dashed #a9ada5;border-radius:14px;background:#f4f1e9;display:grid;place-items:center;text-align:center;padding:32px}.publish-state div{max-width:520px}.publish-state b{display:block;font-family:Georgia,serif;font-size:30px;font-weight:400;margin-bottom:12px}.publish-state p{color:var(--muted);line-height:1.6}.publish-state code{display:inline-block;background:white;border:1px solid var(--line);border-radius:7px;padding:5px 8px;font-size:12px}.embed-note{margin-top:14px;color:var(--muted);font-size:12px;line-height:1.5}.status-pill{white-space:nowrap;border:1px solid var(--line);border-radius:99px;padding:9px 12px;font-size:12px;font-weight:700}.status-pill.live{background:#e4f3dd;border-color:#bdd8b2;color:#28552c}.status-pill.local{background:#fff1df;border-color:#e8cba8;color:#74421c}
 .skills{display:flex;flex-wrap:wrap;gap:10px}.chip{border:1px solid var(--line);background:var(--card);border-radius:99px;padding:10px 15px;font-size:13px}.lesson-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:38px}.lesson{padding:25px 0;border-top:1px solid var(--line)}.lesson b{color:var(--orange)}.lesson p{line-height:1.6;color:var(--muted)}
 footer{background:var(--ink);color:white;padding:70px 0}.footer-grid{display:grid;grid-template-columns:1.4fr .6fr;gap:40px;align-items:end}footer h2{font-family:Georgia,serif;font-size:50px;font-weight:400;margin:0 0 17px}footer p{color:#b8c4bf;line-height:1.6}.foot-links{display:flex;justify-content:flex-end;gap:13px}
-@media(max-width:850px){.navlinks a:not(.button){display:none}.hero-grid,.section-head,.dash-grid,.footer-grid{grid-template-columns:1fr}.hero-side{border-left:0;border-top:1px solid var(--line);padding:25px 0 0}.metrics-grid{grid-template-columns:1fr 1fr}.metric:nth-child(2){border-right:0}.workflow{grid-template-columns:1fr}.step{border-right:0;border-bottom:1px solid var(--line);min-height:0}.finding-grid,.lesson-grid{grid-template-columns:1fr}.foot-links{justify-content:flex-start}.hero{padding-top:65px}}@media(max-width:520px){.shell{width:min(100% - 26px,1180px)}.metrics-grid{grid-template-columns:1fr}.metric{border-right:0;border-bottom:1px solid #ffffff35}.actions{flex-direction:column;align-items:flex-start}}
+@media(max-width:850px){.navlinks a:not(.button){display:none}.hero-grid,.section-head,.dash-grid,.footer-grid,.workbook-switcher{grid-template-columns:1fr}.hero-side{border-left:0;border-top:1px solid var(--line);padding:25px 0 0}.metrics-grid{grid-template-columns:1fr 1fr}.metric:nth-child(2){border-right:0}.workflow{grid-template-columns:1fr}.step{border-right:0;border-bottom:1px solid var(--line);min-height:0}.finding-grid,.lesson-grid{grid-template-columns:1fr}.edition-list{border-right:0;border-bottom:1px solid var(--line)}.workbook-meta{display:block}.status-pill{display:inline-block;margin-top:14px}.foot-links{justify-content:flex-start}.hero{padding-top:65px}}@media(max-width:520px){.shell{width:min(100% - 26px,1180px)}.metrics-grid{grid-template-columns:1fr}.metric{border-right:0;border-bottom:1px solid #ffffff35}.actions{flex-direction:column;align-items:flex-start}.workbook-stage{padding:18px}.tableau-frame,.publish-state{height:500px}}
 `;
 
-const html = `<!doctype html>
+const escapeHtml = (value) => String(value || "")
+  .replaceAll("&", "&amp;")
+  .replaceAll("<", "&lt;")
+  .replaceAll(">", "&gt;")
+  .replaceAll('"', "&quot;");
+
+const tableauUrl = (value) => {
+  try {
+    const url = new URL(value);
+    if (url.protocol !== "https:") return "";
+    if (!url.searchParams.has(":showVizHome")) url.searchParams.set(":showVizHome", "no");
+    return escapeHtml(url.toString());
+  } catch {
+    return "";
+  }
+};
+
+const tableauStage = (url, edition) => url
+  ? `<iframe class="tableau-frame" title="${edition} interactive Tableau workbook" src="${url}" loading="lazy" allowfullscreen></iframe>
+     <p class="embed-note">Interactive view served by Tableau. Use its toolbar to filter, inspect tooltips and open the full workbook.</p>`
+  : `<div class="publish-state"><div><b>Workbook ready; publication required</b><p>The local Tableau workbook has been verified, but a <code>.twb/.twbx</code> file cannot run inside a browser. Publish this edition to Tableau Public or Tableau Cloud, then connect its view URL to enable the live embed.</p><a class="button" href="${github}/tree/main/data/processed/reporting/presentation" target="_blank" rel="noreferrer">View workbook files ↗</a></div></div>
+     <p class="embed-note">No static screenshot is presented as “interactive.” The portfolio activates the real Tableau view when a published URL is supplied.</p>`;
+
+const renderHtml = (v1Url = "", v2Url = "") => `<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="A data analytics portfolio case study transforming FCA complaints workbooks into transparent, reviewable customer-harm intelligence."><title>UK Financial Complaints Intelligence</title><style>${styles}</style></head>
 <body>
-<nav class="shell"><a class="brand" href="#top">MC<span>.</span></a><div class="navlinks"><a href="#case">Case study</a><a href="#findings">Findings</a><a href="#method">Method</a><a class="button" href="${github}" target="_blank" rel="noreferrer">View GitHub ↗</a></div></nav>
+<nav class="shell"><a class="brand" href="#top">MC<span>.</span></a><div class="navlinks"><a href="#case">Case study</a><a href="#findings">Findings</a><a href="#tableau">Dashboards</a><a href="#method">Method</a><a class="button" href="${github}" target="_blank" rel="noreferrer">View GitHub ↗</a></div></nav>
 <main>
 <section class="hero shell" id="top"><div class="eyebrow">Data analytics portfolio · FCA complaints</div><div class="hero-grid"><div><h1>From difficult Excel files to <em>decision-ready intelligence.</em></h1><p class="intro">An end-to-end analytics project that profiles, extracts and validates UK firm-level complaints data—then turns it into explainable early-warning signals and Tableau dashboards.</p><div class="actions"><a class="button" href="#case">Explore the case study ↓</a><a class="button light" href="${github}" target="_blank" rel="noreferrer">Open repository ↗</a></div></div><aside class="hero-side"><strong>2021–25</strong><p>Ten half-year reporting periods, reconciled into one analysis-ready model with source-cell lineage.</p></aside></div></section>
 <section class="metrics"><div class="shell metrics-grid"><div class="metric"><strong>75,231</strong><span>source metric records</span></div><div class="metric"><strong>5,751</strong><span>firm-product-period observations</span></div><div class="metric"><strong>10</strong><span>half-year reporting periods</span></div><div class="metric"><strong>85</strong><span>automated tests</span></div></div></section>
@@ -31,17 +55,57 @@ const html = `<!doctype html>
 ].map(x=>`<article class="step"><b>${x[0]}</b><h3>${x[1]}</h3><p>${x[2]}</p></article>`).join("")}</div></section>
 <section class="section findings" id="findings"><div class="shell"><div class="section-head"><div><div class="kicker">Selected findings</div><h2>A focused queue—not an automated verdict.</h2></div><p>The warning framework separates signals, insufficient evidence and confirmed source anomalies. Results support human prioritisation and are explicitly not findings of misconduct or customer harm.</p></div><div class="finding-grid"><article class="finding"><strong>13</strong><h3>Latest priority observations</h3><p>A focused investigation queue across 13 firms in 2025-H2.</p></article><article class="finding"><strong>71</strong><h3>Insufficient-evidence observations</h3><p>Kept separate from no-current-signal results to avoid false reassurance.</p></article><article class="finding"><strong>1</strong><h3>Confirmed source anomaly</h3><p>Preserved exactly as published and excluded from misleading derivations.</p></article></div></div></section>
 <section class="section shell"><div class="section-head"><div><div class="kicker">Decision layer</div><h2>Signals that can be traced and challenged.</h2></div><p>Peer position, trend deterioration, persistence and data sufficiency are visible together. Reviewers can move from a portfolio signal to its rule definition and original workbook cell.</p></div><div class="dashboard"><div class="dash-top"><strong>Executive overview · 2025-H2</strong><div class="lights"><i></i><i></i><i></i></div></div><div class="dash-grid"><div class="panel"><h4>Warning trend</h4><div class="bars">${[38,52,49,61,55,67,59,73,65,78].map(h=>`<span class="bar" style="height:${h}%"></span>`).join("")}</div></div><div class="panel"><h4>Latest product signals</h4><div class="signals">${[["Insurance & protection",92],["Consumer credit",70],["Investments",52],["Home finance",39],["Banking & cards",34]].map(x=>`<div class="signal"><div><small>${x[0]}</small><div class="track"><div class="fill" style="width:${x[1]}%"></div></div></div><b>${x[1]}</b></div>`).join("")}</div></div></div></div></section>
+<section class="section shell" id="tableau"><div class="section-head"><div><div class="kicker">Tableau workbooks</div><h2>Two editions, one governed story.</h2></div><p>The first workbook covers portfolio monitoring, drill-down, review and data quality. The second adds Bank of England and ONS context without changing the warning score. Choose an edition to inspect its dashboard inventory and launch the published interactive view.</p></div>
+  <div class="workbook-switcher">
+    <div class="edition-list" role="tablist" aria-label="Tableau workbook editions">
+      <button class="edition-button active" type="button" data-edition="v1" role="tab" aria-selected="true"><small>Workbook v1</small><strong>Complaints intelligence</strong><span>Five dashboards · operational monitoring and explainability</span></button>
+      <button class="edition-button" type="button" data-edition="v2" role="tab" aria-selected="false"><small>Workbook v2</small><strong>External context</strong><span>One dashboard · Bank Rate, inflation and complaint trends</span></button>
+    </div>
+    <div class="workbook-stage">
+      <article class="workbook-pane active" data-pane="v1" role="tabpanel">
+        <div class="workbook-meta"><div><h3>Complaints intelligence suite</h3><p>Portfolio overview, firm-product exploration, priority review, rule evidence and source-level quality controls.</p></div><span class="status-pill ${v1Url ? "live" : "local"}">${v1Url ? "Live interactive view" : "Local workbook"}</span></div>
+        <div class="dashboard-tabs" aria-label="Version 1 dashboards">${["Executive Overview","Firm Product Explorer","Priority Review Queue","Rule Explanation","Data Quality and Coverage"].map((name,index)=>`<button class="dashboard-tab${index===0?" active":""}" type="button">${name}</button>`).join("")}</div>
+        ${tableauStage(v1Url, "Version 1")}
+      </article>
+      <article class="workbook-pane" data-pane="v2" role="tabpanel">
+        <div class="workbook-meta"><div><h3>Economic and complaint context</h3><p>Bank Rate, CPI, CPIH and FCA complaint volumes aligned to the same half-year periods, with an explicit non-causation notice.</p></div><span class="status-pill ${v2Url ? "live" : "local"}">${v2Url ? "Live interactive view" : "Local workbook"}</span></div>
+        <div class="dashboard-tabs"><button class="dashboard-tab active" type="button">Economic and Complaint Context</button></div>
+        ${tableauStage(v2Url, "Version 2")}
+      </article>
+    </div>
+  </div>
+</section>
 <section class="section shell" id="method"><div class="section-head"><div><div class="kicker">Tools and judgement</div><h2>Built like a production analytics project.</h2></div><p>Reusable Python modules, governed mappings, automated validation and documented analytical limitations make the work reproducible—not merely presentable.</p></div><div class="skills">${["Python","pandas","openpyxl","pytest","Tableau","Data profiling","Data modelling","Quality assurance","Risk analytics","Governance"].map(x=>`<span class="chip">${x}</span>`).join("")}</div><div class="lesson-grid"><div class="lesson"><b>01</b><h3>Respect source meaning</h3><p>Percentages, rates and counts remain distinct even when labels appear similar.</p></div><div class="lesson"><b>02</b><h3>Make uncertainty visible</h3><p>Missing evidence is not translated into low risk or a zero.</p></div><div class="lesson"><b>03</b><h3>Keep humans accountable</h3><p>Rules prioritise review; documented judgement determines action.</p></div></div></section>
 </main><footer><div class="shell footer-grid"><div><h2>Explore the complete project.</h2><p>Read the methodology, tests, governance documentation and reusable source code on GitHub.</p></div><div class="foot-links"><a class="button light" href="${github}" target="_blank" rel="noreferrer">View repository ↗</a></div></div></footer>
+<script>
+document.querySelectorAll(".edition-button").forEach(button => {
+  button.addEventListener("click", () => {
+    document.querySelectorAll(".edition-button").forEach(item => {
+      const active = item === button;
+      item.classList.toggle("active", active);
+      item.setAttribute("aria-selected", String(active));
+    });
+    document.querySelectorAll(".workbook-pane").forEach(pane => pane.classList.toggle("active", pane.dataset.pane === button.dataset.edition));
+  });
+});
+document.querySelectorAll(".dashboard-tabs").forEach(group => {
+  group.querySelectorAll(".dashboard-tab").forEach(tab => tab.addEventListener("click", () => {
+    group.querySelectorAll(".dashboard-tab").forEach(item => item.classList.toggle("active", item === tab));
+  }));
+});
+</script>
 </body></html>`;
 
 export default {
-  async fetch(request) {
+  async fetch(request, env) {
     const url = new URL(request.url);
     if (url.pathname === "/health") {
       return new Response("ok", { headers: { "content-type": "text/plain" } });
     }
-    return new Response(html, {
+    return new Response(renderHtml(
+      tableauUrl(env?.TABLEAU_V1_URL),
+      tableauUrl(env?.TABLEAU_V2_URL),
+    ), {
       headers: {
         "content-type": "text/html; charset=utf-8",
         "cache-control": "public, max-age=300",
