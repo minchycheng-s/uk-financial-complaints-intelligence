@@ -64,7 +64,13 @@ const renderHtml = (v1Url = "", v2Url = "") => `<!doctype html>
     <div class="workbook-stage">
       <article class="workbook-pane active" data-pane="v1" role="tabpanel">
         <div class="workbook-meta"><div><h3>Complaints intelligence suite</h3><p>Portfolio overview, firm-product exploration, priority review, rule evidence and source-level quality controls.</p></div><span class="status-pill ${v1Url ? "live" : "local"}">${v1Url ? "Live interactive view" : "Local workbook"}</span></div>
-        <div class="dashboard-tabs" aria-label="Version 1 dashboards">${["Executive Overview","Firm Product Explorer","Priority Review Queue","Rule Explanation","Data Quality and Coverage"].map((name,index)=>`<button class="dashboard-tab${index===0?" active":""}" type="button">${name}</button>`).join("")}</div>
+        <div class="dashboard-tabs" aria-label="Version 1 dashboards">${[
+          ["Executive Overview", "ExecutiveOverview"],
+          ["Firm Product Explorer", "FirmandProductExplorer"],
+          ["Priority Review Queue", "PriorityReviewQueue"],
+          ["Rule Explanation", "WarningRuleExplanation"],
+          ["Data Quality and Coverage", "DataQualityandCoverage"],
+        ].map(([name, view], index)=>`<button class="dashboard-tab${index===0?" active":""}" type="button" data-tableau-view="${view}">${name}</button>`).join("")}</div>
         ${tableauStage(v1Url, "Version 1")}
       </article>
       <article class="workbook-pane" data-pane="v2" role="tabpanel">
@@ -91,6 +97,15 @@ document.querySelectorAll(".edition-button").forEach(button => {
 document.querySelectorAll(".dashboard-tabs").forEach(group => {
   group.querySelectorAll(".dashboard-tab").forEach(tab => tab.addEventListener("click", () => {
     group.querySelectorAll(".dashboard-tab").forEach(item => item.classList.toggle("active", item === tab));
+    const frame = group.closest(".workbook-pane")?.querySelector(".tableau-frame");
+    const view = tab.dataset.tableauView;
+    if (!frame || !view) return;
+
+    const nextUrl = new URL(frame.src);
+    const pathParts = nextUrl.pathname.split("/");
+    pathParts[pathParts.length - 1] = view;
+    nextUrl.pathname = pathParts.join("/");
+    frame.src = nextUrl.toString();
   }));
 });
 </script>
